@@ -1,12 +1,16 @@
 package com.isaachome.security.providers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
 import com.isaachome.repo.OTPRepo;
+import com.isaachome.security.authentication.OTPAuthentication;
 
 @Component
 public class OtpAuthenticationProvider implements AuthenticationProvider {
@@ -19,12 +23,19 @@ public class OtpAuthenticationProvider implements AuthenticationProvider {
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String username = authentication.getName();
 		String otp = (String)authentication.getCredentials();
-		return null;
+
+		System.out.println("OtpAuthenticationProvider()");
+		
+		var o = otpRepo.findOTPByUsername(username);
+		if(o.isPresent()) {
+			return new OTPAuthentication(username, otp,List.of(()->"read"));
+		}
+
+		throw new BadCredentialsException("No Otp in the credential");
 	}
 
 	@Override
 	public boolean supports(Class<?> authentication) {
-		// TODO Auto-generated method stub
 		return OtpAuthenticationProvider.class.equals(authentication);
 	}
 

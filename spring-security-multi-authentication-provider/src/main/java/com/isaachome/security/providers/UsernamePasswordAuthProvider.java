@@ -26,6 +26,8 @@ implements AuthenticationProvider{
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String username = authentication.getName();
+
+		System.out.println("UsernamePasswordAuthProvider");
 		String password = (String) authentication.getCredentials();
 	  UserDetails user=	userDetailService.loadUserByUsername(username);
 	  if(passwordEncoder.matches(password, user.getPassword())) {
