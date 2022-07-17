@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 @Entity
-public class OTP {
+public class Otp {
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

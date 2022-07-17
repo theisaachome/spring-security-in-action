@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,9 +29,9 @@ implements AuthenticationProvider{
 		String password = (String) authentication.getCredentials();
 	  UserDetails user=	userDetailService.loadUserByUsername(username);
 	  if(passwordEncoder.matches(password, user.getPassword())) {
-		  return new UsernamePasswordAuthentication(username, password,List.of(()->"read "));
+		  return new UsernamePasswordAuthentication(username, password,user.getAuthorities());
 	  }
-		return null;
+	  throw new BadCredentialsException(" Bad Credential Pls try again.");
 	}
 
 	@Override
