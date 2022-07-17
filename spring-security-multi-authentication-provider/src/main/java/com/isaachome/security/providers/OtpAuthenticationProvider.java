@@ -10,7 +10,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
 import com.isaachome.repo.OTPRepo;
-import com.isaachome.security.authentication.OTPAuthentication;
+import com.isaachome.security.authentication.OtpAuthentication;
 
 @Component
 public class OtpAuthenticationProvider implements AuthenticationProvider {
@@ -27,8 +27,9 @@ public class OtpAuthenticationProvider implements AuthenticationProvider {
 		System.out.println("OtpAuthenticationProvider()");
 		
 		var o = otpRepo.findOTPByUsername(username);
+		
 		if(o.isPresent()) {
-			return new OTPAuthentication(username, otp,List.of(()->"read"));
+			return new OtpAuthentication(username, otp,List.of(()->"read"));
 		}
 
 		throw new BadCredentialsException("No Otp in the credential");
@@ -36,7 +37,7 @@ public class OtpAuthenticationProvider implements AuthenticationProvider {
 
 	@Override
 	public boolean supports(Class<?> authentication) {
-		return OtpAuthenticationProvider.class.equals(authentication);
+		return OtpAuthentication.class.equals(authentication);
 	}
 
 	

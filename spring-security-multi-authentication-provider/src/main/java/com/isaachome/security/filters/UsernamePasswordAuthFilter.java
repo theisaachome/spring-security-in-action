@@ -17,7 +17,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.isaachome.entity.Otp;
 import com.isaachome.repo.OTPRepo;
-import com.isaachome.security.authentication.OTPAuthentication;
+import com.isaachome.security.authentication.OtpAuthentication;
 import com.isaachome.security.authentication.UsernamePasswordAuthentication;
 
 @Component
@@ -54,7 +54,7 @@ public class UsernamePasswordAuthFilter  extends OncePerRequestFilter{
 			
 		}else {
 			// Step 2
-			Authentication b = new OTPAuthentication(username	, otp);
+			Authentication b = new OtpAuthentication(username	, otp);
 			authenticationManager.authenticate(b);
 //			SecurityContextHolder.getContext().setAuthentication(b);
 			// we issue token
