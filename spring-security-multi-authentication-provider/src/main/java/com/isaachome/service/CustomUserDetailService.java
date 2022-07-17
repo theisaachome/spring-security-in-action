@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.isaachome.repo.UserRepo;
+import com.isaachome.security.SecurityUser;
 
 @Service
 public class CustomUserDetailService implements UserDetailsService {
@@ -18,7 +19,7 @@ public class CustomUserDetailService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username)  {
 		var user = userRepo.findUserByUsername(username)
 				.orElseThrow(()-> new UsernameNotFoundException (username));
-		return null;
+		return new SecurityUser(user) ;
 	}
 
 }
