@@ -7,7 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
-public class SsiaCh2Application {
+public class SpringSecurityBasicApp {
 
 	@Bean
 	PasswordEncoder passwordEncoder() {
@@ -15,7 +15,7 @@ public class SsiaCh2Application {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(SsiaCh2Application.class, args);
+		SpringApplication.run(SpringSecurityBasicApp.class, args);
 	}
 
 }

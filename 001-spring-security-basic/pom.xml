@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.isaachome</groupId>
-	<artifactId>ssia-ch2</artifactId>
+	<artifactId>ssia.basic</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ssia-ch2</name>
 	<description>Demo project for Spring Boot</description>

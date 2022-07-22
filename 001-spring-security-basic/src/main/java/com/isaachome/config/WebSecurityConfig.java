@@ -9,19 +9,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
-public class ProjectConfig {
-
+public class WebSecurityConfig {
+	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
     @Bean
     UserDetailsService userDetailsService() {
-    	var u1 = User.withUsername("bill")
+    	// override auto generate  user and password from console.
+    	var uds = new InMemoryUserDetailsManager();
+    	var billUser = User.withUsername("bill")
     			.password(passwordEncoder.encode("12345"))
     			.authorities("read")
     			.build();
+    	uds.createUser(billUser);
     	
-        return new InMemoryUserDetailsManager(u1);
+        return uds;
     }
     
-   
+
 }
